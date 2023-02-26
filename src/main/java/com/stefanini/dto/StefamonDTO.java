@@ -1,5 +1,7 @@
 package com.stefanini.dto;
 
+import com.stefanini.entity.Stefamon;
+
 public class StefamonDTO {
 
     private Long id;
@@ -97,5 +99,16 @@ public class StefamonDTO {
         this.poder = poder;
         this.velocidade = velocidade;
         this.urlFoto = urlFoto;
+    }
+    public StefamonDTO(Stefamon ste){
+        this.id = ste.getId();
+        this.nome = ste.getNome();
+        this.vida = ste.getVida();
+        this.ataque = ste.getAtaque();
+        this.defesa = ste.getDefesa();
+        this.inteligencia = ste.getInteligencia();
+        this.poder = ste.getPoder();
+        this.velocidade = ste.getVelocidade();
+        this.urlFoto = ste.getUrlFoto();
     }
 }

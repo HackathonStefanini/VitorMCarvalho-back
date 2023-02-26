@@ -9,7 +9,7 @@ import java.util.List;
 public class Jogador {
 
     @Id
-    @Column(name = "id_jogador")
+    @Column(name = "IdJogador")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -30,14 +30,6 @@ public class Jogador {
     private List<Stefamon> stefamons = new ArrayList<>();
 
     public Jogador() {
-    }
-
-    public Jogador(Long id, String nickname, String password, BigDecimal saldo, List<Stefamon> stefamons) {
-        this.id = id;
-        this.nickname = nickname;
-        this.password = password;
-        this.saldo = saldo;
-        this.stefamons = stefamons;
     }
 
     public Long getId() {

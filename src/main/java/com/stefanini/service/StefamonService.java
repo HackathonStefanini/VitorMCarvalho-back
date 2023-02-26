@@ -10,13 +10,15 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
 @ApplicationScoped
 public class StefamonService {
     @Inject
     StefamonRepository repository;
 
-    public List<Stefamon> listarTodos(){
-        return repository.listAll();
+    public List<StefamonDTO> listarTodos(){
+        return repository.listAll().stream().map(s->new StefamonDTO(s)).collect(Collectors.toList());
     }
 
     public Stefamon pegarPorId(Long id) {

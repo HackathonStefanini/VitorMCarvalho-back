@@ -9,6 +9,8 @@ import com.stefanini.repository.JogadorRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +30,7 @@ public class JogadorService {
         if(Objects.isNull(jogador.getStefamons())){
             throw new UsuarioException("lista de stefamons vazia!!!");
         }
+        jogador.setStefamons(jogador.getStefamons());
         jogadorRepository.save(jogador);
     }
 
