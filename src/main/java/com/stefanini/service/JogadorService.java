@@ -1,18 +1,33 @@
 package com.stefanini.service;
 
+import com.stefanini.Utils.Crypto;
 import com.stefanini.entity.Jogador;
 import com.stefanini.exceptions.RegraDeNegocioException;
+import com.stefanini.exceptions.UsuarioException;
 import com.stefanini.repository.JogadorRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Objects;
 
+@ApplicationScoped
 public class JogadorService {
-
+    @Inject
     JogadorRepository jogadorRepository;
 
     public void salvar(Jogador jogador) {
+        if(Objects.nonNull(jogadorRepository.findByName(jogador.getNickname()))){
+            throw new UsuarioException("Id de jogador ja existe!!!");
+        }
+        jogador.setPassword(Crypto.decriptografar(jogador.getPassword()));
+        if(jogador.getPassword().length() < 4 || jogador.getPassword().length() > 10){
+            throw new UsuarioException("tamanho de senha incompativel com o exigido!");
+        }
+        if(Objects.isNull(jogador.getStefamons())){
+            throw new UsuarioException("lista de stefamons vazia!!!");
+        }
         jogadorRepository.save(jogador);
     }
 

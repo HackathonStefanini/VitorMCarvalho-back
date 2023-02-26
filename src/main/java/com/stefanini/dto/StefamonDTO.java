@@ -86,4 +86,16 @@ public class StefamonDTO {
 
     public StefamonDTO() {
     }
+
+    public StefamonDTO(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, String urlFoto) {
+        this.id = id;
+        this.nome = nome;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defesa = defesa;
+        this.inteligencia = inteligencia;
+        this.poder = poder;
+        this.velocidade = velocidade;
+        this.urlFoto = urlFoto;
+    }
 }
