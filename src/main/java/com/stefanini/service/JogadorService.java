@@ -1,6 +1,7 @@
 package com.stefanini.service;
 
 import com.stefanini.Utils.Crypto;
+import com.stefanini.dto.JogadorDTO;
 import com.stefanini.entity.Jogador;
 import com.stefanini.exceptions.RegraDeNegocioException;
 import com.stefanini.exceptions.UsuarioException;
@@ -9,6 +10,7 @@ import com.stefanini.repository.JogadorRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +32,24 @@ public class JogadorService {
         if(Objects.isNull(jogador.getStefamons())){
             throw new UsuarioException("lista de stefamons vazia!!!");
         }
+        jogador.setSaldo(BigDecimal.valueOf(500));
         jogador.setStefamons(jogador.getStefamons());
         jogadorRepository.save(jogador);
     }
+
+    public void login(JogadorDTO jogadorDTO){
+        Jogador jogador = jogadorRepository.findByName(jogadorDTO.getNickname());
+        if(Objects.isNull(jogador)){
+            throw new UsuarioException("Id de jogador nao existe!!!");
+        }
+        if(!jogador.getPassword().equals(Crypto.decriptografar(jogadorDTO.getPassword()))){
+            throw new UsuarioException("senha incompativel");
+        }else {
+            jogador.setLogin(true);
+            jogadorRepository.save((jogador));
+        }
+    }
+
 
     public Jogador pegarPorId(Long id) {
         var jogador = jogadorRepository.findById(id);

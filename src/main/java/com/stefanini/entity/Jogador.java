@@ -23,6 +23,16 @@ public class Jogador {
     private BigDecimal saldo;
 
 
+    private Boolean login;
+
+    public Boolean getLogin() {
+        return login;
+    }
+
+    public void setLogin(Boolean login) {
+        this.login = login;
+    }
+
     @ManyToMany
     @JoinTable(name = "Jogador_Stefamon",
             joinColumns = {@JoinColumn(name = "IdJogador")},

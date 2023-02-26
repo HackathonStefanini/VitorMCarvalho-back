@@ -1,5 +1,6 @@
 package com.stefanini.resources;
 
+import com.stefanini.dto.JogadorDTO;
 import com.stefanini.entity.Jogador;
 import com.stefanini.service.JogadorService;
 
@@ -45,4 +46,16 @@ public class JogadorResource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    @POST
+    public Response logar(@Valid JogadorDTO jogador) {
+        jogadorService.login(jogador);
+        return Response.status(Response.Status.OK).build();
+    }
+    /*
+    @GET
+    @Path("comprar/{id}")
+    public Response comprar(@PathParam("id") Long id)  {
+        jogadorService.comprar(id);
+        return Response.status(Response.Status.OK).build();
+    }*/
 }
